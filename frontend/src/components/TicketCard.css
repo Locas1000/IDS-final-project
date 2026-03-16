@@ -1,0 +1,44 @@
+
+.ticket-card {
+  background-color: #ffffff;
+  border: 1px solid #e1e4e8;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+  max-width: 400px;
+}
+
+.ticket-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.ticket-card h3 {
+  margin: 0 0 0.75rem 0;
+  color: #2c3e50;
+  font-size: 1.25rem;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 0.5rem;
+}
+
+.ticket-card p {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  color: #586069;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ticket-card p::first-line {
+  font-weight: 600;
+}
+
+.ticket-card p:nth-of-type(1) {
+  color: #0366d6; 
+}
+
+.ticket-card p:nth-of-type(2) {
+  color: #d73a49; /* Red-ish for Priority */
+}
