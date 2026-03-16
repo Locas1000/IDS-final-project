@@ -1,7 +1,8 @@
-# FixIt Campus 
+
+# FixIt Campus
 
 ##  About the Project
-FixIt Campus resolves the problem of decentralization and the lack of tracking in campus fault reports. Currently, incidents are lost in informal communications, causing slow response times. This software centralizes the entire lifecycle of a defect, from the initial report with photographic evidence to its audited resolution. 
+FixIt Campus resolves the problem of decentralization and the lack of tracking in campus fault reports. Currently, incidents are lost in informal communications, causing slow response times. This software centralizes the entire lifecycle of a defect, from the initial report with photographic evidence to its audited resolution.
 
 The solution allows maintenance managers to assign tasks based on real workload and technician specialty. By implementing a strict state flow and an automatic escalation system (SLA), it ensures no report is forgotten, transforming reactive maintenance into a data-driven operation. It features a mobile-friendly interface for capturing evidence on-site, an immutable audit log, and multichannel notifications to ensure total transparency.
 
@@ -42,11 +43,23 @@ Backend API: http://localhost:5000
 
 Database: localhost:5432 (User: admin, Password: password123, DB: sgm_db)
 
+Database Initialization (First Time Setup)
+When you build the project for the first time, your local database is completely empty. To populate it with the official tables:
+
+Ensure your containers are running (docker compose up -d).
+
+Locate the official database schema at backend/database/schema.sql (once merged by the DB Admin).
+
+Method A (Visual): Open DBeaver or pgAdmin, connect using the credentials above, open a new SQL editor, paste the contents of schema.sql, and hit execute.
+
+Method B (Terminal): Run the following Docker command to inject the file directly:
+
+Bash
+docker exec -i sgm_postgres psql -U admin -d sgm_db < backend/database/schema.sql
 Shutting Down
 To stop the containers gracefully, press Ctrl + C in your terminal. If you ran it in detached mode (-d), run:
 
 Bash
 docker compose down
- Contributing
+Contributing
 Please review our CONTRIBUTING.md file for strict guidelines on our GitHub Flow branching strategy, Conventional Commits, and file naming conventions. All code must pass a Pull Request review before merging into main.
-
