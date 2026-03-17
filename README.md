@@ -1,65 +1,119 @@
+#  FixIt Campus
 
-# FixIt Campus
+**Centralizing campus maintenance, one report at a time.**
+
+FixIt Campus solves the decentralization and lack of tracking in campus fault reports. By replacing informal communication with a centralized lifecycle manager, it ensures every incident—from a broken light to a leaky pipe—is documented, audited, and resolved.
+
+-----
 
 ##  About the Project
-FixIt Campus resolves the problem of decentralization and the lack of tracking in campus fault reports. Currently, incidents are lost in informal communications, causing slow response times. This software centralizes the entire lifecycle of a defect, from the initial report with photographic evidence to its audited resolution.
 
-The solution allows maintenance managers to assign tasks based on real workload and technician specialty. By implementing a strict state flow and an automatic escalation system (SLA), it ensures no report is forgotten, transforming reactive maintenance into a data-driven operation. It features a mobile-friendly interface for capturing evidence on-site, an immutable audit log, and multichannel notifications to ensure total transparency.
+Currently, maintenance requests are often lost in the shuffle of emails and verbal reports. **FixIt Campus** provides:
 
-##  Scope and System Limits
-To ensure the project is delivered on time with high technical quality, the following features are strictly **out of scope**:
-* **Physical Inventory Management:** The system allows users to comment if parts are missing (setting the ticket to a "Blocked" state), but it will not manage stock, warehouse purchases, or suppliers.
-* **Automated Preventive Maintenance:** The system is purely corrective (based on current fault tickets). It will not generate automatic work orders based on calendars or IoT sensors.
-* **Payroll and Payments:** Although it measures technician efficiency, it will not calculate salaries, overtime, or process electronic payments to personnel.
+  * **Centralized Lifecycle:** Tracks defects from initial report (with photo evidence) to audited resolution.
+  * **Smart Assignment:** Allows managers to assign tasks based on workload and technician specialty.
+  * **SLA Enforcement:** An automatic escalation system ensures no report is forgotten.
+  * **Mobile-First Design:** Optimized for technicians to capture evidence on-site.
+
+> 
+
+-----
+
+##  Scope & System Limits
+
+To maintain high technical quality and meet deadlines, the following features are **strictly out of scope**:
+
+  *  **Physical Inventory:** No stock management or warehouse purchasing. (Users can "Block" tickets if parts are missing).
+  *  **Preventive Maintenance:** Purely corrective; no calendar-based or IoT-triggered work orders.
+  *  **Payroll:** No salary calculation or electronic payments to personnel.
+
+-----
 
 ##  Tech Stack
-* **Frontend:** React (Vite)
-* **Backend:** Node.js (Express)
-* **Database:** PostgreSQL
-* **Infrastructure:** Docker & Docker Compose
+
+| Layer | Technology |
+| :--- | :--- |
+| **Frontend** | React (Vite) |
+| **Backend** | Node.js (Express) |
+| **Database** | PostgreSQL |
+| **Infrastructure** | Docker & Docker Compose |
+
+-----
 
 ##  Quickstart Guide
-You do not need to install Node.js or PostgreSQL locally to run this project. Everything is containerized.
+
+You don’t need to install Node.js or PostgreSQL locally. Everything is containerized for a consistent environment.
 
 ### Prerequisites
-* [Docker Engine](https://docs.docker.com/engine/install/) and Docker Compose installed on your machine.
 
-### Running the Application
-1. Clone the repository:
-   ```bash
-   git clone [https://github.com/Locas1000/IDS-final-project.git](https://github.com/Locas1000/IDS-final-project.git)
-   cd IDS-final-project
-Lift the environment using Docker Compose:
+  * **Docker Engine** and **Docker Compose** installed.
 
-Bash
+### 1\. Setup the Environment
+
+Clone the repository and move into the project directory:
+
+```bash
+git clone https://github.com/Locas1000/IDS-final-project.git
+cd IDS-final-project
+```
+
+### 2\. Run the Application
+
+Lift the containers using Docker Compose:
+
+```bash
 docker compose up --build
-(Note: You can use docker compose up -d to run it in the background).
+```
 
-Access the services in your browser:
+*(Use `-d` to run in the background).*
 
-Frontend (React UI): http://localhost:5173
+### 3\. Access Services
 
-Backend API: http://localhost:5000
+  * **Frontend (React UI):** [http://localhost:5173](https://www.google.com/search?q=http://localhost:5173)
+  * **Backend API:** [http://localhost:5000](https://www.google.com/search?q=http://localhost:5000)
+  * **Database:** `localhost:5432`
+      * *User:* `admin` | *Password:* `password123` | *DB:* `sgm_db`
 
-Database: localhost:5432 (User: admin, Password: password123, DB: sgm_db)
+-----
 
-Database Initialization (First Time Setup)
-When you build the project for the first time, your local database is completely empty. To populate it with the official tables:
+##  Database Initialization
 
-Ensure your containers are running (docker compose up -d).
+When running for the first time, your database will be empty. Follow one of these methods to populate the tables:
 
-Locate the official database schema at backend/database/schema.sql (once merged by the DB Admin).
+### Method A: Terminal (Recommended)
 
-Method A (Visual): Open DBeaver or pgAdmin, connect using the credentials above, open a new SQL editor, paste the contents of schema.sql, and hit execute.
+Inject the schema directly into the running container:
 
-Method B (Terminal): Run the following Docker command to inject the file directly:
-
-Bash
+```bash
 docker exec -i sgm_postgres psql -U admin -d sgm_db < backend/database/schema.sql
-Shutting Down
-To stop the containers gracefully, press Ctrl + C in your terminal. If you ran it in detached mode (-d), run:
+```
 
-Bash
-docker compose down
-Contributing
-Please review our CONTRIBUTING.md file for strict guidelines on our GitHub Flow branching strategy, Conventional Commits, and file naming conventions. All code must pass a Pull Request review before merging into main.
+### Method B: Visual (DBeaver/pgAdmin)
+
+1.  Connect using the credentials listed above.
+2.  Open a new SQL Editor.
+3.  Copy/Paste the contents of `backend/database/schema.sql` and execute.
+
+-----
+
+##  Shutting Down
+
+To stop the services:
+
+  * If running in the foreground: Press **Ctrl + C**.
+  * If running in the background:
+    ```bash
+    docker compose down
+    ```
+
+-----
+
+##  Contributing
+
+We follow a strict **GitHub Flow** strategy. Please review `CONTRIBUTING.md` for:
+
+  * Branching strategies
+  * Conventional Commits
+  * File naming conventions
+
+*All code requires a Pull Request review before merging into `main`.*
