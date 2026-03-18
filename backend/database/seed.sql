@@ -1,23 +1,23 @@
 -- Clean up existing data to avoid primary key conflicts on re-runs
-TRUNCATE TABLE HistorialTickets, ImagenesTickets, Tickets, Usuarios RESTART IDENTITY CASCADE;
+TRUNCATE TABLE TicketHistory, TicketImages, Tickets, Users RESTART IDENTITY CASCADE;
 
--- 1. Create 3 Users (Usuario, Dispatcher, Tecnico)
-INSERT INTO Usuarios (nombre, rol, email, password_hash, especialidad) VALUES
-('Juan Pérez', 'Usuario', 'juan.perez@uag.edu.mx', '12345', 'Mantenimiento General'),
-('Ana Martínez', 'Dispatcher', 'ana.admin@sgm.com', '12345', NULL),
-('Carlos Ruiz', 'Tecnico', 'carlos.tech@sgm.com', '12345', 'Electricidad Industrial');
+-- 1. Create 3 Users (User, Dispatcher, Technician)
+INSERT INTO Users (name, role, email, password_hash, specialty) VALUES
+('Juan Perez', 'User', 'juan.perez@uag.edu.mx', '12345', 'General Maintenance'),
+('Ana Martinez', 'Dispatcher', 'ana.admin@sgm.com', '12345', NULL),
+('Carlos Ruiz', 'Technician', 'carlos.tech@sgm.com', '12345', 'Industrial Electricity');
 
 -- 2. Create 5 Tickets with various statuses and priorities
-INSERT INTO Tickets (titulo, descripcion, estado, prioridad, id_usuario_creador, id_tecnico_asignado) VALUES
-('Falla en Climatización A-202', 'El aire acondicionado no enciende y hace un ruido metálico.', 'Abierto', 'Alta', 1, NULL),
-('Gotera en Laboratorio 3', 'Filtración de agua detectada cerca del rack de servidores.', 'Asignado', 'Alta', 1, 3),
-('Mantenimiento Preventivo Elevador', 'Revisión mensual de cables y sensores del elevador norte.', 'En Progreso', 'Media', 2, 3),
-('Lámpara fundida Pasillo B', 'Cambiar luminaria LED en el segundo piso.', 'Resuelto', 'Baja', 1, 3),
-('Puerta de Acceso Atascada', 'La cerradura electrónica no reconoce los tags.', 'Bloqueado', 'Alta', 2, NULL);
+INSERT INTO Tickets (title, description, status, priority, creator_id, assigned_technician_id) VALUES
+('A/C Failure A-202', 'The air conditioning will not turn on and makes a metallic noise.', 'Open', 'High', 1, NULL),
+('Leak in Lab 3', 'Water leak detected near the server rack.', 'Assigned', 'High', 1, 3),
+('Elevator Preventive Maintenance', 'Monthly check of cables and sensors in the north elevator.', 'In Progress', 'Medium', 2, 3),
+('Burnt-out lamp Hallway B', 'Replace LED luminaire on the second floor.', 'Resolved', 'Low', 1, 3),
+('Stuck Access Door', 'The electronic lock does not recognize RFID tags.', 'Blocked', 'High', 2, NULL);
 
 -- 3. Add some evidence and history for a more realistic scenario
-INSERT INTO ImagenesTickets (id_ticket, url_imagen, comentario_evidencia) VALUES
-(1, 'https://cdn.sgm.com/evidencia/ac_noise.jpg', 'Foto del ventilador bloqueado.');
+INSERT INTO TicketImages (ticket_id, image_url, evidence_comment) VALUES
+(1, 'https://cdn.sgm.com/evidencia/ac_noise.jpg', 'Photo of the blocked fan.');
 
-INSERT INTO HistorialTickets (id_ticket, estado_anterior, estado_nuevo, id_usuario_cambio, comentario_cambio) VALUES
-(2, 'Abierto', 'Asignado', 2, 'Asignado a Carlos por cercanía al área.');
+INSERT INTO TicketHistory (ticket_id, previous_status, new_status, changed_by_user_id, change_comment) VALUES
+(2, 'Open', 'Assigned', 2, 'Assigned to Carlos due to proximity to the area.');
